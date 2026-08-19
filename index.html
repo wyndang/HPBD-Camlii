@@ -4,12 +4,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HDPD Camlii :3</title>
+    <title>Chúc Mừng Sinh Nhật Camlii</title>
     <link rel="stylesheet" href="style.css">
     <link rel="icon" type="image/png" href="cake.png">
 </head>
 
 <body>
+    <!-- Thẻ Audio chứa nhạc nền -->
+    <audio id="bgMusic" loop>
+        <source src="audio/background_music.mp3" type="audio/mpeg">
+    </audio>
+
     <!-- Background 1 ảnh hoa ly (làm mờ và tối) -->
     <div class="bg-image"></div>
 
@@ -30,7 +35,7 @@
     </div>
 
     <main class="container">
-        <!-- Khung chứa 4 ảnh: Desktop nằm 4 góc, Mobile/iPad nằm 1 hàng lơ lửng -->
+        <!-- Khung chứa 4 ảnh -->
         <div class="images-wrapper">
             <img src="ly1.jpg" class="polaroid img1" alt="Camlii 1">
             <img src="ly2.jpg" class="polaroid img2" alt="Camlii 2">
@@ -40,7 +45,7 @@
 
         <!-- Cột trung tâm: Lời chúc và bánh kem -->
         <div class="center-content">
-            <h1 class="title">Chúc mừng sinh nhật <span class="heart">camlii</span> &lt;3</h1>
+            <h1 class="title">Chúc mừng sinh nhật <span class="heart">&lt;3</span> Camlii</h1>
 
             <div class="cake-wrapper">
                 <img src="cake.png" class="cake-img" alt="Bánh kem">
@@ -48,13 +53,42 @@
 
             <div class="wishes-box">
                 <p>
-                    Chúc Ly sang tuổi mới luôn xinh đẹp và sờ lay hơn nữa nhe.<br>
-                    Mong mọi điều may mắn, hạnh phúc nhất sẽ đến với Ly.<br>
-                    Happy Birthday &lt;3 !
+                    Chúc Ly bước sang tuổi mới luôn xinh đẹp và vui vẻ.<br>
+                    Mong Ly sẽ sớm hoàn thành được những mục tiêu đã đề ra nhé.<br>
+                    Happy Birthday!
                 </p>
             </div>
         </div>
     </main>
+
+    <!-- Script xử lý tự động phát nhạc -->
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            var bgMusic = document.getElementById("bgMusic");
+
+            // Hàm play nhạc
+            function playMusic() {
+                var playPromise = bgMusic.play();
+                if (playPromise !== undefined) {
+                    playPromise.catch(function (error) {
+                        console.log("Trình duyệt chặn autoplay, đang chờ tương tác của người dùng...");
+                    });
+                }
+            }
+
+            // Cố gắng phát ngay khi load web
+            playMusic();
+
+            // Nếu bị chặn, phát nhạc ngay khi người dùng click hoặc chạm vào màn hình
+            document.body.addEventListener('click', function () {
+                bgMusic.play();
+            }, { once: true }); // { once: true } giúp sự kiện chỉ chạy 1 lần duy nhất để tránh lỗi
+
+            document.body.addEventListener('touchstart', function () {
+                bgMusic.play();
+            }, { once: true });
+        });
+    </script>
 </body>
 
 </html>
